@@ -23,7 +23,7 @@ func asRoutesGetResp(routes []router.Route) RoutesGetResp {
 		routesResp = append(
 			routesResp,
 			route{
-				Destination: fmt.Sprintf("%f,%f", r.Dst.Lat, r.Dst.Long),
+				Destination: fmt.Sprintf("%f,%f", r.Destination.Lat, r.Destination.Long),
 				Duration:    r.Duration,
 				Distance:    r.Distance,
 			},

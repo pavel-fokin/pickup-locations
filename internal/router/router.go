@@ -3,18 +3,8 @@ package router
 import (
 	"context"
 	"fmt"
+	"sort"
 )
-
-type Location struct {
-	Lat  float64
-	Long float64
-}
-
-type Route struct {
-	Dst      Location
-	Duration float64
-	Distance float64
-}
 
 type Router struct {
 	osrm OSRM
@@ -36,6 +26,8 @@ func (r *Router) FindClosest(ctx context.Context, src Location, dsts []Location)
 		}
 		routes = append(routes, route)
 	}
+
+	sort.Sort(ByTimeAndDistance(routes))
 
 	return routes, nil
 }

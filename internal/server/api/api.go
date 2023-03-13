@@ -16,7 +16,7 @@ var (
 // @Summary   List of routes between source and each destination.
 // @Tags      pickup-locations
 // @Produce   json
-// @Success   200        {object}  TODO
+// @Success   200        {object}  RoutesGetResp
 // @Failure   400        {object}  httputil.ErrorResponse
 // @Failure   500        {object}  httputil.ErrorResponse
 // @Router    /routes [get]
