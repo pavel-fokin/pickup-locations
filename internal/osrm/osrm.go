@@ -9,6 +9,8 @@ import (
 	"pavel-fokin/pickup-locations/internal/router"
 )
 
+const baseURL = "https://router.project-osrm.org/route/v1/driving"
+
 type Config struct {
 	Timeout int `env:"OSRM_CLIENT_TIMEOUT_SECONDS" envDefault:"30"`
 }
@@ -27,8 +29,10 @@ func New(cfg Config) *OSRM {
 	}
 }
 
-func (o *OSRM) DrivingRoute_V1(ctx context.Context) (router.Route, error) {
-	resp, err := o.httpClient.Get("https://router.project-osrm.org/route/v1/driving/13.388860,52.517037;13.397634,52.529407?overview=false")
+func (o *OSRM) DrivingRoute_V1(ctx context.Context, src router.Location, dst router.Location) (router.Route, error) {
+	resp, err := o.httpClient.Get(
+		fmt.Sprintf("%s/%f,%f;%f,%f?overview=false", baseURL, src.Lat, src.Long, dst.Lat, dst.Long),
+	)
 	if err != nil {
 		return router.Route{}, fmt.Errorf("DrivingRoute_V1(): %w", err)
 	}
@@ -37,6 +41,6 @@ func (o *OSRM) DrivingRoute_V1(ctx context.Context) (router.Route, error) {
 	if err != nil {
 		return router.Route{}, fmt.Errorf("DrivingRoute_V1(): %w", err)
 	}
-	fmt.Println(route)
+
 	return route, nil
 }

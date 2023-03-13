@@ -36,7 +36,7 @@ func asRoute(body io.ReadCloser) (router.Route, error) {
 		return router.Route{}, fmt.Errorf("asRoute(): %w", err)
 	}
 
-	// TODO we want to validate response from the OSRM service.
+	// TODO: We want to validate response from the OSRM service.
 
 	return router.Route{
 		Dst: router.Location{
