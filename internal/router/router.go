@@ -6,8 +6,8 @@ import (
 )
 
 type Location struct {
-	Long float64
 	Lat  float64
+	Long float64
 }
 
 type Route struct {
@@ -26,7 +26,7 @@ func New(osrm OSRM) *Router {
 	}
 }
 
-func (r *Router) FindClosest(ctx context.Context) ([]Route, error) {
+func (r *Router) FindClosest(ctx context.Context, src Location, dsts []Location) ([]Route, error) {
 	route, err := r.osrm.DrivingRoute_V1(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("FindClosest(): %w", err)

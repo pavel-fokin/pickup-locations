@@ -7,5 +7,5 @@ import (
 
 // Router is an interface to finding routes to pickup locations.
 type Router interface {
-	FindClosest(ctx context.Context) ([]router.Route, error)
+	FindClosest(ctx context.Context, src router.Location, dsts []router.Location) ([]router.Route, error)
 }

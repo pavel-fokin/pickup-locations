@@ -13,7 +13,7 @@ help:
 
 .PHONY: lint
 lint:
-	@staticcheck ./...
+	staticcheck ./...
 
 .PHONY: tests
 tests:

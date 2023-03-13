@@ -24,7 +24,14 @@ func RoutesGet(router Router) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 
-		routes, err := router.FindClosest(ctx)
+		src, dsts, err := parseRoutesParams(r)
+		if err != nil {
+			log.Error(ctx, err, "Couldn't parse the route params.")
+			httputil.AsErrorResponse(w, ErrValidate, http.StatusBadRequest)
+			return
+		}
+
+		routes, err := router.FindClosest(ctx, src, dsts)
 		if err != nil {
 			log.Error(ctx, err, "Couldn't get the routes.")
 			httputil.AsErrorResponse(w, ErrUnknown, http.StatusInternalServerError)
