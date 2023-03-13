@@ -2,7 +2,7 @@ package server
 
 import (
 	"context"
-	"fmt"
+	"log"
 	"net/http"
 	"time"
 
@@ -36,7 +36,6 @@ func New(config Config) *Server {
 		time.Duration(config.HandlerTimeout) * time.Second),
 	)
 	router.Use(httplog.RequestLogger(logger))
-	// router.Use(middleware.Logger)
 	router.Use(middleware.Recoverer)
 
 	router.Get("/swagger/*", httpSwagger.Handler(
@@ -58,7 +57,7 @@ func New(config Config) *Server {
 }
 
 func (s *Server) Start() {
-	fmt.Println("Starting pickup-locations...", s.config.Port)
+	log.Println("Starting pickup-locations...", s.config.Port)
 	s.server.ListenAndServe()
 }
 

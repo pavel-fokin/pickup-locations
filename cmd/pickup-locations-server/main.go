@@ -9,12 +9,14 @@ import (
 	"github.com/caarlos0/env/v7"
 	"github.com/joho/godotenv"
 
+	"pavel-fokin/pickup-locations/internal/osrm"
 	"pavel-fokin/pickup-locations/internal/router"
 	"pavel-fokin/pickup-locations/internal/server"
 )
 
 type Config struct {
 	Server server.Config
+	OSRM   osrm.Config
 }
 
 func ReadConfig() *Config {
@@ -45,7 +47,8 @@ func main() {
 	sig := make(chan os.Signal, 1)
 	signal.Notify(sig, syscall.SIGINT, syscall.SIGTERM)
 
-	router := router.New()
+	osrmClient := osrm.New(config.OSRM)
+	router := router.New(osrmClient)
 
 	httpServer := server.New(config.Server)
 	httpServer.SetupRoutesAPI(router)

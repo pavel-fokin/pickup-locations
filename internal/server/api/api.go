@@ -13,10 +13,6 @@ var (
 	ErrUnknown  = errors.New(`unknown error ¯\_(ツ)_/¯`)
 )
 
-func StatusOK(w http.ResponseWriter, r *http.Request) {
-	w.WriteHeader(http.StatusOK)
-}
-
 // @Summary   List of routes between source and each destination.
 // @Tags      pickup-locations
 // @Produce   json
@@ -28,13 +24,14 @@ func RoutesGet(router Router) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		ctx := r.Context()
 
-		err := router.FindClosest(ctx)
+		routes, err := router.FindClosest(ctx)
 		if err != nil {
-			log.Error(ctx, err, "")
+			log.Error(ctx, err, "Couldn't get the routes.")
 			httputil.AsErrorResponse(w, ErrUnknown, http.StatusInternalServerError)
 			return
 		}
 
-		StatusOK(w, r)
+		resp := asRoutesGetResp(routes)
+		httputil.AsSuccessResponse(w, resp, http.StatusOK)
 	}
 }

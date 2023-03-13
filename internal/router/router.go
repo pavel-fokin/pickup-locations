@@ -20,14 +20,16 @@ type Router struct {
 	osrm OSRM
 }
 
-func New() *Router {
-	return &Router{}
+func New(osrm OSRM) *Router {
+	return &Router{
+		osrm: osrm,
+	}
 }
 
-func (r *Router) FindClosest(ctx context.Context) error {
-	err := r.osrm.DrivingRoute_V1(ctx)
+func (r *Router) FindClosest(ctx context.Context) ([]Route, error) {
+	route, err := r.osrm.DrivingRoute_V1(ctx)
 	if err != nil {
-		return fmt.Errorf("FindCloses(): %w", err)
+		return nil, fmt.Errorf("FindClosest(): %w", err)
 	}
-	return nil
+	return []Route{route}, nil
 }
