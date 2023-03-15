@@ -1,0 +1,63 @@
+basePath: /
+definitions:
+  api.RoutesGetResp:
+    properties:
+      routes:
+        items:
+          $ref: '#/definitions/api.route'
+        type: array
+      source:
+        type: string
+    type: object
+  api.route:
+    properties:
+      destination:
+        type: string
+      distance:
+        type: number
+      duration:
+        type: number
+    type: object
+  httputil.Error:
+    properties:
+      message:
+        type: string
+    type: object
+  httputil.ErrorResponse:
+    properties:
+      data:
+        properties:
+          errors:
+            items:
+              $ref: '#/definitions/httputil.Error'
+            type: array
+        type: object
+    type: object
+info:
+  contact: {}
+  description: Pickup Locations is a service that takes the source and a list of destinations
+    and returns a list of routes between source and each destination.
+  title: Pickup Locations API
+  version: 0.0.1
+paths:
+  /routes:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/api.RoutesGetResp'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httputil.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httputil.ErrorResponse'
+      summary: List of routes between source and each destination.
+      tags:
+      - pickup-locations
+swagger: "2.0"

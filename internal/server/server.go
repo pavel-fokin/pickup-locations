@@ -10,6 +10,8 @@ import (
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/httplog"
 	httpSwagger "github.com/swaggo/http-swagger"
+
+	_ "pavel-fokin/pickup-locations/docs"
 )
 
 type Config struct {
