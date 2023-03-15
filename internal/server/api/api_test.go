@@ -7,6 +7,6 @@ import (
 )
 
 // TODO: Add unitests for API.
-func Test_API_Dummy(t *testing.T) {
+func TestAPI_Dummy(t *testing.T) {
 	assert.True(t, true)
 }

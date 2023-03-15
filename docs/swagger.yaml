@@ -35,13 +35,31 @@ definitions:
     type: object
 info:
   contact: {}
-  description: Pickup Locations is a service that takes the source and a list of destinations
-    and returns a list of routes between source and each destination.
+  description: |-
+    Pickup Locations is a service that takes the source
+    and a list of destinations and returns a list of routes
+    between source and each destination.
   title: Pickup Locations API
   version: 0.0.1
 paths:
   /routes:
     get:
+      parameters:
+      - description: Source
+        example: 13.388860,52.517037
+        in: query
+        name: src
+        required: true
+        type: string
+      - collectionFormat: multi
+        description: Destination
+        example: 13.397634,52.529407
+        in: query
+        items:
+          type: string
+        name: dst
+        required: true
+        type: array
       produces:
       - application/json
       responses:

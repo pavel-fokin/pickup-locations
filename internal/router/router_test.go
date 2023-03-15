@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_Router_Dummy(t *testing.T) {
+// TODO: Add unitests for Router.
+func TestRouter_Dummy(t *testing.T) {
 	assert.True(t, true)
 }

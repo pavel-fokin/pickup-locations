@@ -16,6 +16,8 @@ var (
 // @Summary   List of routes between source and each destination.
 // @Tags      pickup-locations
 // @Produce   json
+// @Param     src        query     string      true "Source" example(13.388860,52.517037)
+// @Param     dst        query     []string    true "Destination" collectionFormat(multi) example(13.397634,52.529407)
 // @Success   200        {object}  RoutesGetResp
 // @Failure   400        {object}  httputil.ErrorResponse
 // @Failure   500        {object}  httputil.ErrorResponse

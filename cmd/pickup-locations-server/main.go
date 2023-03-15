@@ -39,7 +39,9 @@ func ReadConfig() *Config {
 
 // @Title Pickup Locations API
 // @Version 0.0.1
-// @Description Pickup Locations is a service that takes the source and a list of destinations and returns a list of routes between source and each destination.
+// @Description Pickup Locations is a service that takes the source
+// @Description and a list of destinations and returns a list of routes
+// @Description between source and each destination.
 // @BasePath /
 func main() {
 	config := ReadConfig()

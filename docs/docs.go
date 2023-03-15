@@ -24,6 +24,28 @@ const docTemplate = `{
                     "pickup-locations"
                 ],
                 "summary": "List of routes between source and each destination.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "example": "13.388860,52.517037",
+                        "description": "Source",
+                        "name": "src",
+                        "in": "query",
+                        "required": true
+                    },
+                    {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "collectionFormat": "multi",
+                        "example": "13.397634,52.529407",
+                        "description": "Destination",
+                        "name": "dst",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -110,7 +132,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/",
 	Schemes:          []string{},
 	Title:            "Pickup Locations API",
-	Description:      "Pickup Locations is a service that takes the source and a list of destinations and returns a list of routes between source and each destination.",
+	Description:      "Pickup Locations is a service that takes the source\nand a list of destinations and returns a list of routes\nbetween source and each destination.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 }
