@@ -36,12 +36,13 @@ func asRoute(body io.ReadCloser) (router.Route, error) {
 		return router.Route{}, fmt.Errorf("asRoute(): %w", err)
 	}
 
-	// TODO: We want to validate response from the OSRM service.
+	// TODO: Add validation of the OSRM response.
 
+	// It seems that OSRM project returns (longtitude, latitude) pair.
 	return router.Route{
 		Destination: router.Location{
-			Long: payload.Waypoints[0].Location[0],
-			Lat:  payload.Waypoints[0].Location[1],
+			Lng: payload.Waypoints[0].Location[0],
+			Lat: payload.Waypoints[0].Location[1],
 		},
 		Duration: payload.Routes[0].Duration,
 		Distance: payload.Routes[0].Distance,

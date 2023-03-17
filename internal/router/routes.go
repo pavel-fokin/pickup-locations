@@ -1,8 +1,8 @@
 package router
 
 type Location struct {
-	Lat  float64
-	Long float64
+	Lat float64
+	Lng float64
 }
 
 type Route struct {

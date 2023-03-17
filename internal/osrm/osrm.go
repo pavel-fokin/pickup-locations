@@ -30,12 +30,15 @@ func New(cfg Config) *OSRM {
 }
 
 func (o *OSRM) DrivingRoute_V1(ctx context.Context, src router.Location, dst router.Location) (router.Route, error) {
+	// It seems that OSRM project accepts (longtitude, latitude) pairs.
 	resp, err := o.httpClient.Get(
-		fmt.Sprintf("%s/%f,%f;%f,%f?overview=false", baseURL, src.Lat, src.Long, dst.Lat, dst.Long),
+		fmt.Sprintf("%s/%f,%f;%f,%f?overview=false", baseURL, src.Lng, src.Lat, dst.Lng, dst.Lat),
 	)
 	if err != nil {
 		return router.Route{}, fmt.Errorf("DrivingRoute_V1(): %w", err)
 	}
+
+	// TODO: Add handling of the different error codes from the OSRM service.
 
 	route, err := asRoute(resp.Body)
 	if err != nil {

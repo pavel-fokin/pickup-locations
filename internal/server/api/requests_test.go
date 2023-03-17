@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-// TODO In real life tests should be more specific.
+// TODO: Add more cases for the unit tests.
 func Test_ParseRoutesParams_Valid(t *testing.T) {
 	assert := assert.New(t)
 

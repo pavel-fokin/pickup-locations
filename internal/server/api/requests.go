@@ -12,24 +12,25 @@ import (
 func parseParamToLocation(param string) (router.Location, error) {
 	params := strings.Split(param, ",")
 
+	// We expect (latitude, longtitude) pair.
 	lat, err := strconv.ParseFloat(params[0], 64)
 	if err != nil {
 		return router.Location{}, fmt.Errorf("parseParamToLocation() %w", err)
 	}
-	long, err := strconv.ParseFloat(params[1], 64)
+	lng, err := strconv.ParseFloat(params[1], 64)
 	if err != nil {
 		return router.Location{}, fmt.Errorf("parseParamToLocation() %w", err)
 	}
 	src := router.Location{
-		Lat:  lat,
-		Long: long,
+		Lat: lat,
+		Lng: lng,
 	}
 
 	return src, nil
 }
 
 func parseRoutesParams(r *http.Request) (src router.Location, dsts []router.Location, err error) {
-
+	// TODO: Add More validatons.
 	srcParam := r.URL.Query().Get("src")
 	if srcParam == "" {
 		return router.Location{}, nil, fmt.Errorf("'src' is required")
