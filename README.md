@@ -3,9 +3,6 @@
 `pickup-locations` takes the source and a list of destinations
 and returns a list of routes between source and each destination.
 
-The service has been deployed to the Google Cloud.
-(https://pickup-locations-iwbwmdhm6q-lz.a.run.app/routes)
-
 ## Requirements
 
 - Go 1.20
